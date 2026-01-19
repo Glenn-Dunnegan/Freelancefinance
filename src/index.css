@@ -1205,6 +1205,18 @@
       display: block;
     }
   }
+
+  @media print {
+    .print\:hidden {
+      display: none;
+    }
+  }
+
+  @media print {
+    .print\:p-0 {
+      padding: calc(var(--spacing) * 0);
+    }
+  }
 }
 
 :root {

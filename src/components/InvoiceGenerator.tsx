@@ -95,7 +95,7 @@ export function InvoiceGenerator() {
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-8">
+      <div className="grid lg:grid-cols-3 gap-8 print:hidden">
         {/* Form Section */}
         <div className="lg:col-span-2 space-y-6">
           {/* Invoice Details */}
@@ -414,11 +414,13 @@ export function InvoiceGenerator() {
       </div>
 
       {/* Bottom Banner Ad */}
-      <AdPlaceholder type="leaderboard" className="mt-8" />
+      <div className="print:hidden">
+        <AdPlaceholder type="leaderboard" className="mt-8" />
+      </div>
 
       {/* Invoice Preview */}
       {showPreview && (
-        <div ref={invoiceRef} className="mt-8">
+        <div ref={invoiceRef} className="mt-8 print:hidden">
           <div className="bg-white rounded-2xl shadow-lg p-8 mb-4">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl text-gray-900">Invoice Preview</h2>
