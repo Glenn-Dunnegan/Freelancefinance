@@ -1,6 +1,5 @@
 {
       "name": "Freelance Rate Calculator",
-      "homepage": "https://glenn-dunnegan.github.io/freelancefinance",
       "version": "0.1.0",
       "private": true,
       "dependencies": {
@@ -56,9 +55,7 @@
       },
       "scripts": {
             "dev": "vite",
-            "start": "react-scripts start",
-            "build": "react-scripts build",
-            "predeploy": "npm run build",
-            "deploy": "gh-pages -d build"
+            "build": "vite build",
+            "deploy": "gh-pages -d dist"
       }
 }
