@@ -240,8 +240,7 @@ export function FreelanceCalculator() {
           </div>
 
           {/* Mid-content Ad */}
-          <AdPlaceholder type="rectangle" />
-
+            <AdPlaceholder type="rectangle" />
           <div className="bg-white rounded-2xl shadow-lg p-8">
             <h2 className="text-2xl text-gray-900 mb-6 flex items-center gap-2">
               <TrendingUp className="w-6 h-6 text-indigo-600" />
@@ -314,8 +313,9 @@ export function FreelanceCalculator() {
       </div>
 
       {/* Bottom Banner Ad */}
-      <AdPlaceholder type="leaderboard" className="mt-8" />
-
+      <div style={{marginTop: 40}}>
+        <AdPlaceholder type="leaderboard" className="mt-8" />
+      </div>
       {/* Affiliate Links Section */}
       <div className="mt-8">
         <AffiliateLinks />
