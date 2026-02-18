@@ -416,7 +416,7 @@ export function InvoiceGenerator() {
       </div>
 
       {/* Bottom Banner Ad */}
-      <div className="print:hidden">
+      <div className="print:hidden" style={{marginTop: 20}}>
         <AdPlaceholder type="leaderboard" className="mt-8" />
       </div>
 
