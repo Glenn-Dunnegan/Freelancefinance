@@ -90,7 +90,7 @@ export function InvoiceGenerator() {
       <div className="text-center mb-8">
         <div className="flex items-center justify-center gap-3 mb-4">
           <FileText className="w-10 h-10 text-indigo-600" />
-          <h1 className="text-4xl text-gray-900">Invoice Generator</h1>
+          <h1 className="text-4xl text-gray-900" style={{marginTop:40}}>Invoice Generator</h1>
         </div>
         <p className="text-gray-600">
           Create professional invoices for your freelance work
