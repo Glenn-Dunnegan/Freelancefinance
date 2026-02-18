@@ -12,7 +12,9 @@ interface LineItem {
 export function InvoiceGenerator() {
   const [invoiceNumber, setInvoiceNumber] = useState('INV-001');
   const [invoiceDate, setInvoiceDate] = useState(new Date().toISOString().split('T')[0]);
-  const [dueDate, setDueDate] = useState('');
+  const tomorrow = new Date(Date.now() + 1000 * 60 * 60 * 24);
+  const [dueDate, setDueDate] = useState(() => tomorrow.toISOString().split('T')[0]);
+  //const [dueDate, setDueDate] = useState('');
   
   // Your details
   const [yourName, setYourName] = useState('');
@@ -27,7 +29,7 @@ export function InvoiceGenerator() {
   
   // Line items
   const [lineItems, setLineItems] = useState<LineItem[]>([
-    { id: '1', description: '', quantity: 1, rate: 0 }
+    { id: '1', description: '', quantity: 0, rate: 0 }
   ]);
   
   const [taxRate, setTaxRate] = useState(0);
@@ -39,7 +41,7 @@ export function InvoiceGenerator() {
   const addLineItem = () => {
     setLineItems([
       ...lineItems,
-      { id: Date.now().toString(), description: '', quantity: 1, rate: 0 }
+      { id: Date.now().toString(), description: '', quantity: 0, rate: 0 }
     ]);
   };
 
@@ -73,7 +75,7 @@ export function InvoiceGenerator() {
 
   const handleDownload = () => {
     // In a real implementation, you would generate a PDF here
-    alert('In a production app, this would generate a PDF download. For now, please use the Print function and save as PDF.');
+    alert('In progress. For now, please use the Print function and save as PDF.');
   };
 
   const handleGenerate = () => {
@@ -371,7 +373,7 @@ export function InvoiceGenerator() {
 
         {/* Sidebar */}
         <div className="space-y-6">
-          <AdPlaceholder type="rectangle" />
+          <AdPlaceholder type="rectangle" className="mb-6 no-print"/>
 
           {/* Actions */}
           {showPreview && (
@@ -396,7 +398,7 @@ export function InvoiceGenerator() {
             </div>
           )}
 
-          <AdPlaceholder type="rectangle" />
+          <AdPlaceholder type="rectangle" className='mb-6 no-print'/>
 
           {/* Tips */}
           <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-6">

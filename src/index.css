@@ -1217,6 +1217,22 @@
       padding: calc(var(--spacing) * 0);
     }
   }
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+  }
+  @media print {
+    .mb-6 {
+      display: none !important;
+    }
+  }
+  @media print {
+    .text-center.mb-8 {
+      display: none !important;
+    }
+  }
+
 }
 
 :root {
