@@ -13,8 +13,8 @@ export function InvoiceGenerator() {
   const [invoiceNumber, setInvoiceNumber] = useState('INV-001');
   const [invoiceDate, setInvoiceDate] = useState(new Date().toISOString().split('T')[0]);
   const tomorrow = new Date(Date.now() + 1000 * 60 * 60 * 24);
-  const [dueDate, setDueDate] = useState(() => tomorrow.toISOString().split('T')[0]);
-  //const [dueDate, setDueDate] = useState('');
+  // const [dueDate, setDueDate] = useState(() => tomorrow.toISOString().split('T')[0]);
+  const [dueDate, setDueDate] = useState('');
   
   // Your details
   const [yourName, setYourName] = useState('');
