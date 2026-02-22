@@ -6,6 +6,7 @@ import { AffiliateLinks } from './AffiliateLinks';
 import { SEOHead } from './SEOHead';
 import { SEOContent } from './SEOContent';
 import { FAQSection } from './FAQSection';
+import { Footer } from './Footer';
 
 export function FreelanceCalculator() {
   const [desiredSalary, setDesiredSalary] = useState(75000);
@@ -67,7 +68,7 @@ export function FreelanceCalculator() {
       <AdPlaceholder type="leaderboard" className="mb-6" />
 
       <div className="text-center mb-8">
-        <div className="flex items-center justify-center gap-3 mb-4">
+        <div className="flex items-center justify-center gap-3 mb-4" style={{marginTop:40}}>
           <Calculator className="w-10 h-10 text-indigo-600" />
           <h1 className="text-4xl text-gray-900">Freelance Rate Calculator</h1>
         </div>
@@ -330,6 +331,7 @@ export function FreelanceCalculator() {
       <div className="mt-8">
         <FAQSection />
       </div>
+      <Footer/>
     </div>
   );
 }
