@@ -15,7 +15,7 @@ interface LineItem {
 export function InvoiceGenerator() {
   const [invoiceNumber, setInvoiceNumber] = useState('INV-001');
   const [invoiceDate, setInvoiceDate] = useState(new Date().toISOString().split('T')[0]);
-  const tomorrow = new Date(Date.now() + 1000 * 60 * 60 * 24);
+  //const tomorrow = new Date(Date.now() + 1000 * 60 * 60 * 24);
   // const [dueDate, setDueDate] = useState(() => tomorrow.toISOString().split('T')[0]);
   const [dueDate, setDueDate] = useState('');
   
@@ -38,8 +38,41 @@ export function InvoiceGenerator() {
   const [taxRate, setTaxRate] = useState(0);
   const [notes, setNotes] = useState('');
   const [showPreview, setShowPreview] = useState(false);
+  const [logoUrl, setLogoUrl] = useState<string>('');
   
   const invoiceRef = useRef<HTMLDivElement>(null);
+  const logoInputRef = useRef<HTMLInputElement>(null);
+
+  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Check file size (limit to 2MB)
+      if (file.size > 2 * 1024 * 1024) {
+        alert('File size must be less than 2MB');
+        return;
+      }
+      
+      // Check file type
+      if (!file.type.startsWith('image/')) {
+        alert('Please upload an image file');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const result = event.target?.result as string;
+        setLogoUrl(result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeLogo = () => {
+    setLogoUrl('');
+    if (logoInputRef.current) {
+      logoInputRef.current.value = '';
+    }
+  };
 
   const addLineItem = () => {
     setLineItems([
@@ -198,6 +231,67 @@ export function InvoiceGenerator() {
                   onChange={(e) => setYourPhone(e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
                 />
+              </div>
+            </div>
+          </div>
+
+          {/* Business Logo */}
+          <div className="bg-white rounded-2xl shadow-lg p-8">
+            <h2 className="text-2xl text-gray-900 mb-6">Business Logo</h2>
+            
+            <div className="flex items-start gap-6">
+              <div className="flex-shrink-0">
+                {logoUrl ? (
+                  <div className="relative">
+                    <img
+                      src={logoUrl}
+                      alt="Business Logo"
+                      className="h-32 w-32 object-contain border-2 border-gray-200 rounded-lg p-2 bg-gray-50"
+                    />
+                    <button
+                      onClick={removeLogo}
+                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors"
+                      title="Remove logo"
+                    >
+                      <div className="rmvLogo">Remove logo</div>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                ) : (
+                  <div className="h-32 w-32 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center bg-gray-50">
+                    <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                )}
+              </div>
+
+              <div className="flex-1">
+                <label className="block text-sm text-gray-700 mb-3">
+                  Upload Business Logo
+                </label>
+                <p className="text-sm text-gray-600 mb-4">
+                  Add your business logo to appear at the top of your invoices. Supported formats: PNG, JPG, GIF. Max 2MB.
+                </p>
+                <input
+                  ref={logoInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleLogoUpload}
+                  className="block w-full text-sm text-gray-500
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-lg file:border-0
+                    file:text-sm file:font-semibold
+                    file:bg-indigo-50 file:text-indigo-700
+                    hover:file:bg-indigo-100
+                    cursor-pointer"
+                  style={{border: '1px solid rgba(0, 0, 0, 0.30)', padding: '5px', borderRadius: '10px', cursor: 'pointer'}}
+                />
+                {logoUrl && (
+                  <p className="text-xs text-green-600 mt-2">✓ Logo uploaded successfully</p>
+                )}
               </div>
             </div>
           </div>
@@ -420,7 +514,7 @@ export function InvoiceGenerator() {
       </div>
 
       {/* Bottom Banner Ad */}
-      <div className="print:hidden" style={{marginTop: 20}}>
+      <div className="print:hidden" style={{marginTop: 20, marginBottom: 20}}>
         <AdPlaceholder type="leaderboard" className="mt-8" />
       </div>
 
@@ -462,6 +556,7 @@ export function InvoiceGenerator() {
                 tax={calculateTax()}
                 total={calculateTotal()}
                 notes={notes}
+                logoUrl={logoUrl}
               />
             </div>
           </div>
@@ -487,6 +582,7 @@ export function InvoiceGenerator() {
           tax={calculateTax()}
           total={calculateTotal()}
           notes={notes}
+          logoUrl={logoUrl}
         />
       </div>
     </div>
@@ -510,15 +606,33 @@ interface InvoicePrintViewProps {
   tax: number;
   total: number;
   notes: string;
+  logoUrl: string;
 }
 
 function InvoicePrintView(props: InvoicePrintViewProps) {
   return (
     <div className="p-12 bg-white">
-      <div className="mb-8">
-        <h1 className="text-4xl text-gray-900 mb-2">INVOICE</h1>
-        <p className="text-gray-600">#{props.invoiceNumber}</p>
-      </div>
+      {/* Logo Section */}
+      {props.logoUrl && (
+        <div className="mb-8 flex items-center justify-between">
+          <div className="text-right">
+            <h1 className="text-4xl text-gray-900 mb-2">INVOICE</h1>
+            <p className="text-gray-600">#{props.invoiceNumber}</p>
+          </div>
+          <img
+            src={props.logoUrl}
+            alt="Business Logo"
+            className="h-16 object-contain max-w-xs"
+          />
+        </div>
+      )}
+      
+      {!props.logoUrl && (
+        <div className="mb-8">
+          <h1 className="text-4xl text-gray-900 mb-2">INVOICE</h1>
+          <p className="text-gray-600">#{props.invoiceNumber}</p>
+        </div>
+      )}
 
       <div className="grid grid-cols-2 gap-8 mb-8">
         <div>

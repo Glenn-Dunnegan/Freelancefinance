@@ -227,8 +227,21 @@
   }
 
   img, video {
-    max-width: 100%;
+    max-width: 500px;
     height: auto;
+  }
+
+  .rmvLogo{
+    color: rgb(0, 0, 0);
+    opacity: .5;
+    background-color: #0000;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 5px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-style: italic;
+    cursor: pointer;
+    margin-top: 5px;
   }
 
   button, input, select, optgroup, textarea {

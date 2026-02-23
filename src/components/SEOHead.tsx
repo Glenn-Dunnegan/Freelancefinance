@@ -17,11 +17,13 @@ export function SEOHead() {
           ogDescription: 'Generate professional invoices for your freelance work instantly. Free tool for freelancers to create and download invoices.',
           features: [
             'Invoice generation',
+            'Business logo upload',
             'PDF download',
             'Line item management',
             'Payment term customization',
             'Professional templates',
-            'Instant invoice creation'
+            'Instant invoice creation',
+            'Tax calculation'
           ]
         }
       : {

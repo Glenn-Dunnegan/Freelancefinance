@@ -1,4 +1,4 @@
-import { FileText, Download, Clock, CheckCircle } from 'lucide-react';
+import { FileText, Download, Clock, CheckCircle, Image } from 'lucide-react';
 
 export function InvoiceGeneratorSEO() {
   return (
@@ -56,6 +56,19 @@ export function InvoiceGeneratorSEO() {
 
           <div className="border border-gray-200 rounded-lg p-6">
             <div className="flex items-start gap-3 mb-3">
+              <Image className="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="text-gray-900 mb-2">Add Your Business Logo</h3>
+                <p className="text-sm text-gray-600">
+                  Upload your business logo to appear on every invoice. A professional logo makes your invoices 
+                  instantly recognizable and reinforces your brand identity with clients.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="border border-gray-200 rounded-lg p-6">
+            <div className="flex items-start gap-3 mb-3">
               <Download className="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" />
               <div>
                 <h3 className="text-gray-900 mb-2">Download as PDF</h3>
@@ -95,6 +108,7 @@ export function InvoiceGeneratorSEO() {
         </p>
 
         <ul className="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li><strong>Business logo:</strong> Upload your logo to appear on invoices for brand recognition</li>
           <li><strong>Invoice number:</strong> A unique identifier for tracking and reference</li>
           <li><strong>Your business information:</strong> Name, address, phone, and email</li>
           <li><strong>Client information:</strong> Their name, address, and contact details</li>
@@ -110,11 +124,12 @@ export function InvoiceGeneratorSEO() {
           <div className="flex gap-3">
             <CheckCircle className="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" />
             <div>
-              <h4 className="text-gray-900 mb-2">Pro Tip: Invoice Numbering</h4>
+              <h4 className="text-gray-900 mb-2">Pro Tip: Brand Your Invoices with a Logo</h4>
               <p className="text-sm text-gray-700">
-                Keep your invoice numbers sequential and consistent. Start with 001 or 1001 and increment by one 
-                for each invoice. This helps with organization, makes it easier to spot missing invoices, and looks 
-                more professional to clients. Consider including a year prefix like "2025-001" to organize by year.
+                Uploading your business logo to your invoices creates a professional appearance and reinforces brand 
+                recognition with clients. Your logo appears at the top of the invoice on both screen preview and printed 
+                versions. Supported formats: PNG, JPG, and GIF (max 2MB). A high-quality logo instantly elevates the 
+                perceived professionalism of your invoice.
               </p>
             </div>
           </div>
@@ -134,10 +149,28 @@ export function InvoiceGeneratorSEO() {
           <li><strong>Keep copies:</strong> Archive all invoices for accounting and tax purposes</li>
         </ul>
 
+        <h3 className="text-xl text-gray-900 mb-4">
+          Brand Your Invoices with Your Logo
+        </h3>
+
+        <p className="text-gray-700 mb-4">
+          One of the best ways to make your invoices stand out is to include your business logo. Our invoice generator 
+          makes it easy to upload and customize your logo on every invoice you create.
+        </p>
+
+        <ul className="list-disc list-inside space-y-2 text-gray-700 mb-6">
+          <li><strong>Simple upload:</strong> Click "Upload Business Logo" and select your image file</li>
+          <li><strong>Instant preview:</strong> See how your logo looks on the invoice immediately</li>
+          <li><strong>Multiple formats:</strong> Supports PNG, JPG, and GIF files up to 2MB</li>
+          <li><strong>Professional appearance:</strong> Logo displays prominently on both screen and printed invoices</li>
+          <li><strong>Easy removal:</strong> Remove or replace your logo anytime with a single click</li>
+          <li><strong>Customizable sizing:</strong> Adjust logo size directly in the code for print optimization</li>
+        </ul>
+
         <p className="text-gray-700 mt-8 p-4 bg-blue-50 rounded-lg">
           Our invoice generator is completely free and works right in your browser. No installation, no sign-ups, 
-          no hidden fees. Create as many professional invoices as you need, download them as PDFs, and focus on 
-          growing your freelance business.
+          no hidden fees. Create as many professional invoices as you need, add your logo for brand recognition, 
+          download them as PDFs, and focus on growing your freelance business.
         </p>
       </div>
     </article>
