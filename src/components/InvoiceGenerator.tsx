@@ -2,6 +2,8 @@ import { useState, useRef } from 'react';
 import { FileText, Plus, Trash2, Download, Printer } from 'lucide-react';
 import { AdPlaceholder } from './AdPlaceholder';
 import { Footer } from './Footer';
+import { SEOHead } from './SEOHead';
+import { InvoiceGeneratorSEO } from './InvoiceGeneratorSEO';
 
 interface LineItem {
   id: string;
@@ -85,6 +87,7 @@ export function InvoiceGenerator() {
 
   return (
     <div className="max-w-6xl mx-auto">
+      <SEOHead />
       {/* Top Banner Ad */}
       <AdPlaceholder type="leaderboard" className="mb-6" />
 
@@ -420,6 +423,12 @@ export function InvoiceGenerator() {
       <div className="print:hidden" style={{marginTop: 20}}>
         <AdPlaceholder type="leaderboard" className="mt-8" />
       </div>
+
+      {/* SEO Content Section */}
+      <div className="mt-12 print:hidden">
+        <InvoiceGeneratorSEO />
+      </div>
+
       <Footer />
 
       {/* Invoice Preview */}
