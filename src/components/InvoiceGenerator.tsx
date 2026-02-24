@@ -29,7 +29,7 @@ export function InvoiceGenerator() {
   const [clientName, setClientName] = useState('');
   const [clientEmail, setClientEmail] = useState('');
   const [clientAddress, setClientAddress] = useState('');
-  const [logoPos, setLogoPos] = useState<'left' | 'right'>('right');
+  const [logoPos, setLogoPos] = useState<'right' | 'left' | 'top' | 'center'>('right');
   
   // Line items
   const [lineItems, setLineItems] = useState<LineItem[]>([
@@ -74,6 +74,10 @@ export function InvoiceGenerator() {
     if (logoInputRef.current) {
       logoInputRef.current.value = '';
     }
+  };
+
+  const changeLogoPosition = (position: 'right' | 'left' | 'top' | 'center') => {
+    setLogoPos(position);
   };
 
   const addLineItem = () => {
@@ -293,29 +297,6 @@ export function InvoiceGenerator() {
                 />
                 {logoUrl && (
                   <p className="text-xs text-green-600 mt-2">✓ Logo uploaded successfully</p>
-                )}
-                
-                {/* Logo Size Control */}
-                {logoUrl && (
-                  <div className="mt-4">
-                    <label className="block text-sm text-gray-700 mb-2">
-                      Logo Size: {logoSize}px
-                    </label>
-                    <input
-                      type="range"
-                      min="48"
-                      max="256"
-                      step="8"
-                      value={logoSize}
-                      onChange={(e) => setLogoSize(Number(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
-                    />
-                    <div className="flex justify-between text-xs text-gray-500 mt-1">
-                      <span>Small</span>
-                      <span>Medium</span>
-                      <span>Large</span>
-                    </div>
-                  </div>
                 )}
               </div>
             </div>
@@ -538,18 +519,6 @@ export function InvoiceGenerator() {
         </div>
       </div>
 
-      {/* Bottom Banner Ad */}
-      <div className="print:hidden" style={{marginTop: 20, marginBottom: 20}}>
-        <AdPlaceholder type="leaderboard" className="mt-8" />
-      </div>
-
-      {/* SEO Content Section */}
-      <div className="mt-12 print:hidden">
-        <InvoiceGeneratorSEO />
-      </div>
-
-      <Footer />
-
       {/* Invoice Preview */}
       {showPreview && (
         <div ref={invoiceRef} className="mt-8 print:hidden">
@@ -583,11 +552,122 @@ export function InvoiceGenerator() {
                 notes={notes}
                 logoUrl={logoUrl}
                 logoSize={logoSize}
+                logoPos={logoPos}
               />
+            </div>
+            
+            {/* Logo Size Control */}
+            {logoUrl && (
+              <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <h3 className="text-sm font-semibold text-gray-900 mb-3">Logo Size</h3>
+                <label className="block text-sm text-gray-700 mb-2">
+                  {logoSize}px
+                </label>
+                <input
+                  type="range"
+                  min="48"
+                  max="256"
+                  step="8"
+                  value={logoSize}
+                  onChange={(e) => setLogoSize(Number(e.target.value))}
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                />
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>Small</span>
+                  <span>Medium</span>
+                  <span>Large</span>
+                </div>
+              </div>
+            )}
+            
+            {/* Logo Position Controls */}
+            {logoUrl && (
+              <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <h3 className="text-sm font-semibold text-gray-900 mb-3">Logo Position</h3>
+                <div className="flex gap-2 flex-wrap">
+                  <button
+                    onClick={() => setLogoPos('right')}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                      logoPos === 'right'
+                        ? 'bg-indigo-600 text-white'
+                        : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-100'
+                    }`}
+                  >
+                    Top Right
+                  </button>
+                  <button
+                    onClick={() => setLogoPos('left')}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                      logoPos === 'left'
+                        ? 'bg-indigo-600 text-white'
+                        : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-100'
+                    }`}
+                  >
+                    Top Left
+                  </button>
+                  <button
+                    onClick={() => setLogoPos('center')}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                      logoPos === 'center'
+                        ? 'bg-indigo-600 text-white'
+                        : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-100'
+                    }`}
+                  >
+                    Top Center
+                  </button>
+                  <button
+                    onClick={() => setLogoPos('top')}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                      logoPos === 'top'
+                        ? 'bg-indigo-600 text-white'
+                        : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-100'
+                    }`}
+                  >
+                    Above Title
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Actions - Below Invoice Preview */}
+      {showPreview && (
+        <div className="mt-6 print:hidden">
+          <div className="bg-white rounded-2xl shadow-lg p-6">
+            <h3 className="text-gray-900 mb-4">Actions</h3>
+            <div className="space-y-3">
+              <button
+                onClick={handlePrint}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+              >
+                <Printer className="w-4 h-4" />
+                Print Invoice
+              </button>
+              <button
+                onClick={handleDownload}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-indigo-600 text-indigo-600 rounded-lg hover:bg-indigo-50 transition-colors"
+              >
+                <Download className="w-4 h-4" />
+                Download PDF
+              </button>
             </div>
           </div>
         </div>
       )}
+
+      {/* Bottom Banner Ad */}
+      <div className="print:hidden" style={{marginTop: 20, marginBottom: 20}}>
+        <AdPlaceholder type="leaderboard" className="mt-8" />
+      </div>
+
+      {/* SEO Content Section */}
+      <div className="mt-12 print:hidden">
+        <InvoiceGeneratorSEO />
+      </div>
+
+      <Footer />
 
       {/* Hidden Invoice Preview for Printing */}
       <div className="hidden print:block">
@@ -610,6 +690,7 @@ export function InvoiceGenerator() {
           notes={notes}
           logoUrl={logoUrl}
           logoSize={logoSize}
+          logoPos={logoPos}
         />
       </div>
     </div>
@@ -635,13 +716,14 @@ interface InvoicePrintViewProps {
   notes: string;
   logoUrl: string;
   logoSize: number;
+  logoPos: 'right' | 'left' | 'top' | 'center';
 }
 
 function InvoicePrintView(props: InvoicePrintViewProps) {
   return (
     <div className="p-12 bg-white" style={{position: 'relative'}}>
       {/* Logo Section */}
-      {props.logoUrl && (
+      {props.logoUrl && props.logoPos === 'right' &&(
         <div className="mb-8 flex items-center justify-between">
           <div className="text-right">
             <h1 className="text-4xl text-gray-900 mb-2">INVOICE</h1>
@@ -656,6 +738,49 @@ function InvoicePrintView(props: InvoicePrintViewProps) {
         </div>
       )}
       
+      {props.logoUrl && props.logoPos === 'left' && (
+        <div className="mb-8 flex items-center justify-between">
+          <img
+            src={props.logoUrl}
+            alt="Business Logo"
+            className="object-contain max-w-xs"
+            style={{ height: `${props.logoSize}px` }}
+          />
+          <div className="text-right">
+            <h1 className="text-4xl text-gray-900 mb-2">INVOICE</h1>
+            <p className="text-gray-600">#{props.invoiceNumber}</p>
+          </div>
+        </div>
+      )}
+
+      {props.logoUrl && props.logoPos === 'center' && (
+        <div className="mb-8 flex flex-col items-center">
+          <img
+            src={props.logoUrl}
+            alt="Business Logo"
+            className="object-contain max-w-xs mb-4"
+            style={{ height: `${props.logoSize}px` }}
+          />
+          <h1 className="text-4xl text-gray-900 mb-2">INVOICE</h1>
+          <p className="text-gray-600">#{props.invoiceNumber}</p>
+        </div>
+      )}
+
+      {props.logoUrl && props.logoPos === 'top' && (
+        <div className="mb-8">
+          <div className="flex justify-center mb-6">
+            <img
+              src={props.logoUrl}
+              alt="Business Logo"
+              className="object-contain max-w-xs"
+              style={{ height: `${props.logoSize}px` }}
+            />
+          </div>
+          <h1 className="text-4xl text-gray-900 mb-2">INVOICE</h1>
+          <p className="text-gray-600">#{props.invoiceNumber}</p>
+        </div>
+      )}
+
       {!props.logoUrl && (
         <div className="mb-8">
           <h1 className="text-4xl text-gray-900 mb-2">INVOICE</h1>
