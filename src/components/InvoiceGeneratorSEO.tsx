@@ -162,9 +162,10 @@ export function InvoiceGeneratorSEO() {
           <li><strong>Simple upload:</strong> Click "Upload Business Logo" and select your image file</li>
           <li><strong>Instant preview:</strong> See how your logo looks on the invoice immediately</li>
           <li><strong>Multiple formats:</strong> Supports PNG, JPG, and GIF files up to 2MB</li>
+          <li><strong>Flexible positioning:</strong> Choose from 4 logo positions - Top Right, Top Left, Top Center, or Above Title</li>
+          <li><strong>Adjustable sizing:</strong> Control logo size with an easy slider from 48px to 256px for perfect scaling</li>
           <li><strong>Professional appearance:</strong> Logo displays prominently on both screen and printed invoices</li>
           <li><strong>Easy removal:</strong> Remove or replace your logo anytime with a single click</li>
-          <li><strong>Customizable sizing:</strong> Adjust logo size directly in the code for print optimization</li>
         </ul>
 
         <p className="text-gray-700 mt-8 p-4 bg-blue-50 rounded-lg">

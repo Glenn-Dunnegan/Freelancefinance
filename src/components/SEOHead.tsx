@@ -18,6 +18,8 @@ export function SEOHead() {
           features: [
             'Invoice generation',
             'Business logo upload',
+            'Logo size adjustment',
+            'Logo position customization',
             'PDF download',
             'Line item management',
             'Payment term customization',
@@ -122,6 +124,9 @@ export function SEOHead() {
           "description": "Create professional invoices instantly for your freelance work with our free online invoice generator.",
           "featureList": [
             "Invoice generation",
+            "Business logo upload",
+            "Logo size adjustment",
+            "Logo position customization",
             "PDF download",
             "Line item management",
             "Payment term customization",
