@@ -611,7 +611,7 @@ interface InvoicePrintViewProps {
 
 function InvoicePrintView(props: InvoicePrintViewProps) {
   return (
-    <div className="p-12 bg-white">
+    <div className="p-12 bg-white" style={{zIndex: 2}}>
       {/* Logo Section */}
       {props.logoUrl && (
         <div className="mb-8 flex items-center justify-between">
@@ -622,7 +622,8 @@ function InvoicePrintView(props: InvoicePrintViewProps) {
           <img
             src={props.logoUrl}
             alt="Business Logo"
-            className="h-16 object-contain max-w-xs"
+            //className="h-16 object-contain max-w-xs"
+            className='businessLogoForPrint'
           />
         </div>
       )}

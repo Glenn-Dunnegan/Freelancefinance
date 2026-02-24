@@ -231,6 +231,12 @@
     height: auto;
   }
 
+  .businessLogoForPrint {
+    height: 4rem;
+    object-fit: contain;
+    max-width: 100%;
+  }
+
   .rmvLogo{
     color: rgb(0, 0, 0);
     opacity: .5;
