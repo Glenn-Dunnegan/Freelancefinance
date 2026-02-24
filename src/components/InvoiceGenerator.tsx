@@ -29,6 +29,7 @@ export function InvoiceGenerator() {
   const [clientName, setClientName] = useState('');
   const [clientEmail, setClientEmail] = useState('');
   const [clientAddress, setClientAddress] = useState('');
+  const [logoPos, setLogoPos] = useState<'left' | 'right'>('right');
   
   // Line items
   const [lineItems, setLineItems] = useState<LineItem[]>([
@@ -39,6 +40,7 @@ export function InvoiceGenerator() {
   const [notes, setNotes] = useState('');
   const [showPreview, setShowPreview] = useState(false);
   const [logoUrl, setLogoUrl] = useState<string>('');
+  const [logoSize, setLogoSize] = useState(96); // Default size in pixels (h-24 = 96px)
   
   const invoiceRef = useRef<HTMLDivElement>(null);
   const logoInputRef = useRef<HTMLInputElement>(null);
@@ -291,6 +293,29 @@ export function InvoiceGenerator() {
                 />
                 {logoUrl && (
                   <p className="text-xs text-green-600 mt-2">✓ Logo uploaded successfully</p>
+                )}
+                
+                {/* Logo Size Control */}
+                {logoUrl && (
+                  <div className="mt-4">
+                    <label className="block text-sm text-gray-700 mb-2">
+                      Logo Size: {logoSize}px
+                    </label>
+                    <input
+                      type="range"
+                      min="48"
+                      max="256"
+                      step="8"
+                      value={logoSize}
+                      onChange={(e) => setLogoSize(Number(e.target.value))}
+                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                    />
+                    <div className="flex justify-between text-xs text-gray-500 mt-1">
+                      <span>Small</span>
+                      <span>Medium</span>
+                      <span>Large</span>
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
@@ -557,6 +582,7 @@ export function InvoiceGenerator() {
                 total={calculateTotal()}
                 notes={notes}
                 logoUrl={logoUrl}
+                logoSize={logoSize}
               />
             </div>
           </div>
@@ -583,6 +609,7 @@ export function InvoiceGenerator() {
           total={calculateTotal()}
           notes={notes}
           logoUrl={logoUrl}
+          logoSize={logoSize}
         />
       </div>
     </div>
@@ -607,11 +634,12 @@ interface InvoicePrintViewProps {
   total: number;
   notes: string;
   logoUrl: string;
+  logoSize: number;
 }
 
 function InvoicePrintView(props: InvoicePrintViewProps) {
   return (
-    <div className="p-12 bg-white" style={{zIndex: 2}}>
+    <div className="p-12 bg-white" style={{position: 'relative'}}>
       {/* Logo Section */}
       {props.logoUrl && (
         <div className="mb-8 flex items-center justify-between">
@@ -622,8 +650,8 @@ function InvoicePrintView(props: InvoicePrintViewProps) {
           <img
             src={props.logoUrl}
             alt="Business Logo"
-            //className="h-16 object-contain max-w-xs"
-            className='businessLogoForPrint'
+            className="object-contain max-w-xs"
+            style={{ height: `${props.logoSize}px` }}
           />
         </div>
       )}
