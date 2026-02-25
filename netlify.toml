@@ -2,6 +2,26 @@
   command = "npm run build"
   publish = "dist"
 
+# Exclude these files from the catch-all redirect
+[[redirects]]
+  from = "/ads.txt"
+  to = "/ads.txt"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/robots.txt"
+  to = "/robots.txt"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*.txt"
+  to = "/:splat.txt"
+  status = 200
+  force = true
+
+# Catch-all for SPA routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
