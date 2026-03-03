@@ -6,7 +6,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className="bg-gray-200 p-4 text-center print:hidden">
       <p className="text-gray-600">
-        &copy; {currentYear} <a href="https://Freelance-finance.com" className="hover:underline">Glenn Dunnegan</a>. All rights reserved.
+        &copy; {currentYear} <a href="https://Freelance-finance.com" className="hover:underline">Vertex Labs</a>. All rights reserved.
       </p>
     </footer>
   );

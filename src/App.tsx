@@ -1,6 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { FreelanceCalculator } from './components/FreelanceCalculator';
 import { InvoiceGenerator } from './components/InvoiceGenerator';
+import { FreelancingGuide2026 } from './components/FreelancingGuide2026';
+import { HiddenCosts } from './components/HiddenCosts';
+import { NegotiatingRates } from './components/NegotiatingRates';
+import { FreelancerTaxGuide } from './components/FreelancerTaxGuide';
 import { Navigation } from './components/Navigation';
 
 export default function App() {
@@ -14,6 +18,10 @@ export default function App() {
           <Routes>
             <Route path="/" element={<FreelanceCalculator />} />
             <Route path="/invoice-generator" element={<InvoiceGenerator />} />
+            <Route path="/guide/freelancing-101" element={<FreelancingGuide2026 />} />
+            <Route path="/guide/hidden-costs" element={<HiddenCosts />} />
+            <Route path="/guide/negotiating-rates" element={<NegotiatingRates />} />
+            <Route path="/guide/tax-guide" element={<FreelancerTaxGuide />} />
           </Routes>
         </div>
       </div>
