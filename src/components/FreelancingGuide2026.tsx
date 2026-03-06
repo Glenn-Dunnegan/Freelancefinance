@@ -1,5 +1,4 @@
 import { Briefcase, Target, DollarSign, TrendingUp, Users, Shield } from 'lucide-react';
-import { AdPlaceholder } from './AdPlaceholder';
 import { Footer } from './Footer';
 import { SEOHead } from './SEOHead';
 
@@ -9,7 +8,7 @@ export function FreelancingGuide2026() {
       <SEOHead />
       
       <div style={{marginBottom:40}}>
-        <AdPlaceholder type="leaderboard" className="mb-6" />
+        {/* <AdPlaceholder type="leaderboard" className="mb-6" /> */}
       </div>
 
       <article className="bg-white rounded-2xl shadow-lg p-8 mb-8">
@@ -186,7 +185,7 @@ export function FreelancingGuide2026() {
         </div>
       </article>
 
-      <AdPlaceholder type="rectangle" className="mb-8" />
+      {/* <AdPlaceholder type="rectangle" className="mb-8" /> */}
       <Footer />
     </div>
   );

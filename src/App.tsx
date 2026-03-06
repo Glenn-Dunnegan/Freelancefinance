@@ -6,6 +6,11 @@ import { HiddenCosts } from './components/HiddenCosts';
 import { NegotiatingRates } from './components/NegotiatingRates';
 import { FreelancerTaxGuide } from './components/FreelancerTaxGuide';
 import { Navigation } from './components/Navigation';
+import { AboutPage } from './components/AboutPage';
+import { ContactPage } from './components/ContactPage';
+import { PrivacyPolicy } from './components/PrivacyPolicy';
+import { TermsOfService } from './components/TermsOfService';
+import { AffiliateDisclosure } from './components/AffiliateDisclosure';
 
 export default function App() {
   return (
@@ -22,6 +27,11 @@ export default function App() {
             <Route path="/guide/hidden-costs" element={<HiddenCosts />} />
             <Route path="/guide/negotiating-rates" element={<NegotiatingRates />} />
             <Route path="/guide/tax-guide" element={<FreelancerTaxGuide />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/affiliate-disclosure" element={<AffiliateDisclosure />} />
           </Routes>
         </div>
       </div>

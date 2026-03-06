@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Calculator, DollarSign, Calendar, TrendingUp, Briefcase, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { AdPlaceholder } from './AdPlaceholder';
-import { AffiliateLinks } from './AffiliateLinks';
 import { SEOHead } from './SEOHead';
 import { SEOContent } from './SEOContent';
 import { FAQSection } from './FAQSection';
@@ -65,7 +63,7 @@ export function FreelanceCalculator() {
       <SEOHead />
       
       {/* Top Banner Ad */}
-      <AdPlaceholder type="leaderboard" className="mb-6" />
+      {/* <AdPlaceholder type="leaderboard" className="mb-6" /> */}
 
       <div className="text-center mb-8">
         <div className="flex items-center justify-center gap-3 mb-4" style={{marginTop:40}}>
@@ -209,7 +207,7 @@ export function FreelanceCalculator() {
         {/* Results Section */}
         <div className="space-y-6">
           {/* Sidebar Ad */}
-          <AdPlaceholder type="rectangle" />
+          {/* <AdPlaceholder type="rectangle" /> */}
 
           <div className="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl shadow-lg p-8 text-white">
             <h2 className="text-2xl mb-6 flex items-center gap-2">
@@ -241,7 +239,7 @@ export function FreelanceCalculator() {
           </div>
 
           {/* Mid-content Ad */}
-            <AdPlaceholder type="rectangle" />
+            {/* <AdPlaceholder type="rectangle" /> */}
           <div className="bg-white rounded-2xl shadow-lg p-8">
             <h2 className="text-2xl text-gray-900 mb-6 flex items-center gap-2">
               <TrendingUp className="w-6 h-6 text-indigo-600" />
@@ -315,12 +313,12 @@ export function FreelanceCalculator() {
 
       {/* Bottom Banner Ad */}
       <div style={{marginTop: 40}}>
-        <AdPlaceholder type="leaderboard" className="mt-8" />
+        {/* <AdPlaceholder type="leaderboard" className="mt-8" /> */}
       </div>
       {/* Affiliate Links Section */}
-      <div className="mt-8">
+      {/* <div className="mt-8">
         <AffiliateLinks />
-      </div>
+      </div> */}
 
       {/* SEO Content Section */}
       <div className="mt-8">

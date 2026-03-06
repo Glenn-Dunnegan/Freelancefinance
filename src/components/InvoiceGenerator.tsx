@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react';
 import { FileText, Plus, Trash2, Download, Printer } from 'lucide-react';
-import { AdPlaceholder } from './AdPlaceholder';
 import { Footer } from './Footer';
 import { SEOHead } from './SEOHead';
 import { InvoiceGeneratorSEO } from './InvoiceGeneratorSEO';
@@ -128,7 +127,7 @@ export function InvoiceGenerator() {
     <div className="max-w-6xl mx-auto">
       <SEOHead />
       {/* Top Banner Ad */}
-      <AdPlaceholder type="leaderboard" className="mb-6" />
+      {/* <AdPlaceholder type="leaderboard" className="mb-6" /> */}
 
       <div className="text-center mb-8">
         <div className="flex items-center justify-center gap-3 mb-4" style={{marginTop:40}}>
@@ -477,7 +476,7 @@ export function InvoiceGenerator() {
 
         {/* Sidebar */}
         <div className="space-y-6">
-          <AdPlaceholder type="rectangle" className="mb-6 no-print"/>
+          {/* <AdPlaceholder type="rectangle" className="mb-6 no-print"/> */}
 
           {/* Actions */}
           {showPreview && (
@@ -502,7 +501,7 @@ export function InvoiceGenerator() {
             </div>
           )}
 
-          <AdPlaceholder type="rectangle" className='mb-6 no-print'/>
+          {/* <AdPlaceholder type="rectangle" className='mb-6 no-print'/> */}
 
           {/* Tips */}
           <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-6">
@@ -659,7 +658,7 @@ export function InvoiceGenerator() {
 
       {/* Bottom Banner Ad */}
       <div className="print:hidden" style={{marginTop: 20, marginBottom: 20}}>
-        <AdPlaceholder type="leaderboard" className="mt-8" />
+        {/* <AdPlaceholder type="leaderboard" className="mt-8" /> */}
       </div>
 
       {/* SEO Content Section */}
