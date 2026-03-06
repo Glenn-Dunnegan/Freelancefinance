@@ -45,19 +45,13 @@ export function Dropdown({ icon: Icon, label, links, activePath }: DropdownProps
       </button>
       
       {isOpen && (
-        <div className="dropdown">
+        <div className="dropdown2">
           {links.map((link, index) => (
             <Link
               key={link.path}
               to={link.path}
               onClick={() => setIsOpen(false)}
-              className={`block px-4 py-3 text-sm transition-colors ${
-                isActive(link.path)
-                  ? 'bg-indigo-50 text-indigo-700 font-semibold'
-                  : 'text-gray-700 hover:bg-gray-50'
-              } ${
-                index !== links.length - 1 ? 'border-b border-gray-100' : ''
-              }`}
+              className='dditem'
             >
               {link.label}
             </Link>

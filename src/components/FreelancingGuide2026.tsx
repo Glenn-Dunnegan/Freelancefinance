@@ -8,7 +8,9 @@ export function FreelancingGuide2026() {
     <div className="max-w-4xl mx-auto py-12 px-4">
       <SEOHead />
       
-      <AdPlaceholder type="leaderboard" className="mb-6" />
+      <div style={{marginBottom:40}}>
+        <AdPlaceholder type="leaderboard" className="mb-6" />
+      </div>
 
       <article className="bg-white rounded-2xl shadow-lg p-8 mb-8">
         <div className="flex items-center gap-3 mb-6">
