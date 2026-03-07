@@ -346,6 +346,23 @@
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
   }
 
+  .mobileNav{
+    display: none;
+    margin-right: 50px;
+  }
+  .navContainerTop{
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .mobileNav{
+    display: block;
+  }}
+  @media (min-width: 767px) {
+    .navContainerTop{
+    display: block;
+  }}
+
   @supports (color: color-mix(in lab, red, red)) {
     ::placeholder {
       color: color-mix(in oklab, currentColor 50%, transparent);

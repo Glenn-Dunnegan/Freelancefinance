@@ -1,8 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Calculator, FileText, BookOpen, ChevronDown } from 'lucide-react';
+import { Calculator, FileText } from 'lucide-react';
 import { useState } from 'react';
-import { Dropdown } from './Dropdown';
 import { Dropdown2 } from './Dd';
+import { MobileNav } from './MobileNav';
 
 export function Navigation() {
   const location = useLocation();
@@ -17,15 +17,21 @@ export function Navigation() {
     { path: '/guide/tax-guide', label: 'Tax Guide' }
   ];
 
+  const mobileNavItems = [
+    { label: 'Rate Calculator', to: '/' },
+    { label: 'Invoice Generator', to: '/invoice-generator' },
+    ...guideLinks.map(guide => ({ label: guide.label, to: guide.path }))
+  ];
+
   return (
     <nav className="bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2 text-gray-900 hover:text-indigo-700 transition-colors">
             <Calculator className="w-6 h-6 text-indigo-600" />
             <span className="text-xl text-gray-900">Freelance Tools</span>
-          </div>
-
+          </Link>
+          <div className="navContainerTop">
           <div className="flex gap-1">
             <Link
               to="/"
@@ -52,6 +58,10 @@ export function Navigation() {
             
             {/* Guides Dropdown */}
             <div><Dropdown2 label={'Guides'} items={guideLinks.map(guide => ({ label: guide.label, onClick: () => setIsGuidesOpen(false), path:guide.path }))} /></div>
+          </div>
+          </div>
+          <div className='mobileNav'>
+              <MobileNav items={mobileNavItems}/>
           </div>
         </div>
       </div>
