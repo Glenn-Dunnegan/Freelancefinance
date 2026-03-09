@@ -2,23 +2,23 @@
   command = "npm run build"
   publish = "dist"
 
-# Exclude these files from the catch-all redirect
+# Force HTTPS and remove www prefix
 [[redirects]]
-  from = "/ads.txt"
-  to = "/ads.txt"
-  status = 200
+  from = "http://www.freelance-finance.com/*"
+  to = "https://freelance-finance.com/:splat"
+  status = 301
   force = true
 
 [[redirects]]
-  from = "/robots.txt"
-  to = "/robots.txt"
-  status = 200
+  from = "http://freelance-finance.com/*"
+  to = "https://freelance-finance.com/:splat"
+  status = 301
   force = true
 
 [[redirects]]
-  from = "/*.txt"
-  to = "/:splat.txt"
-  status = 200
+  from = "https://www.freelance-finance.com/*"
+  to = "https://freelance-finance.com/:splat"
+  status = 301
   force = true
 
 # Catch-all for SPA routing
