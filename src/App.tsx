@@ -2,9 +2,8 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 
-const FreelanceCalculator = lazy(() =>
-  import('./components/FreelanceCalculator').then((m) => ({ default: m.FreelanceCalculator }))
-);
+import { FreelanceCalculator } from './components/FreelanceCalculator';
+
 const InvoiceGenerator = lazy(() =>
   import('./components/InvoiceGenerator').then((m) => ({ default: m.InvoiceGenerator }))
 );

@@ -2,9 +2,15 @@ import { useState, useEffect } from 'react';
 import { Calculator, DollarSign, Calendar, TrendingUp, Briefcase, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SEOHead } from './SEOHead';
-import { SEOContent } from './SEOContent';
-import { FAQSection } from './FAQSection';
+import { lazy, Suspense } from 'react';
 import { Footer } from './Footer';
+
+const SEOContent = lazy(() =>
+  import('./SEOContent').then((m) => ({ default: m.SEOContent }))
+);
+const FAQSection = lazy(() =>
+  import('./FAQSection').then((m) => ({ default: m.FAQSection }))
+);
 
 export function FreelanceCalculator() {
   const [desiredSalary, setDesiredSalary] = useState(75000);
@@ -322,12 +328,16 @@ export function FreelanceCalculator() {
 
       {/* SEO Content Section */}
       <div className="mt-8">
-        <SEOContent />
+          <Suspense fallback={null}>
+           <SEOContent />
+          </Suspense>
       </div>
 
       {/* FAQ Section */}
       <div className="mt-8">
-        <FAQSection />
+          <Suspense fallback={null}>
+           <FAQSection />
+          </Suspense>
       </div>
       <Footer/>
     </div>
