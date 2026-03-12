@@ -3,6 +3,7 @@ import { FileText, Plus, Trash2, Download, Printer } from 'lucide-react';
 import { Footer } from './Footer';
 import { SEOHead } from './SEOHead';
 import { InvoiceGeneratorSEO } from './InvoiceGeneratorSEO';
+import { trackEvent } from '../analytics';
 
 interface LineItem {
   id: string;
@@ -111,15 +112,29 @@ export function InvoiceGenerator() {
   };
 
   const handlePrint = () => {
+    trackEvent('invoice_print_clicked', {
+      line_item_count: lineItems.length,
+      total: Number(calculateTotal().toFixed(2)),
+    });
     window.print();
   };
 
   const handleDownload = () => {
+    trackEvent('invoice_download_clicked', {
+      line_item_count: lineItems.length,
+      total: Number(calculateTotal().toFixed(2)),
+    });
     // In a real implementation, you would generate a PDF here
     alert('In progress. For now, please use the Print function and save as PDF.');
   };
 
   const handleGenerate = () => {
+    trackEvent('invoice_generated', {
+      line_item_count: lineItems.length,
+      total: Number(calculateTotal().toFixed(2)),
+      has_logo: Boolean(logoUrl),
+      has_notes: Boolean(notes.trim()),
+    });
     setShowPreview(true);
   };
 

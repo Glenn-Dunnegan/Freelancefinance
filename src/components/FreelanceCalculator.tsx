@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Calculator, DollarSign, Calendar, TrendingUp, Briefcase, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SEOHead } from './SEOHead';
 import { lazy, Suspense } from 'react';
 import { Footer } from './Footer';
+import { trackEvent } from '../analytics';
 
 const SEOContent = lazy(() =>
   import('./SEOContent').then((m) => ({ default: m.SEOContent }))
@@ -13,6 +14,7 @@ const FAQSection = lazy(() =>
 );
 
 export function FreelanceCalculator() {
+  const hasMountedRef = useRef(false);
   const [desiredSalary, setDesiredSalary] = useState(75000);
   const [workingDaysPerYear, setWorkingDaysPerYear] = useState(230);
   const [hoursPerDay, setHoursPerDay] = useState(8);
@@ -33,6 +35,24 @@ export function FreelanceCalculator() {
   useEffect(() => {
     calculateRates();
   }, [desiredSalary, workingDaysPerYear, hoursPerDay, businessExpenses, profitMargin, taxRate, billablePercentage]);
+
+  useEffect(() => {
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true;
+      return;
+    }
+
+    const timeout = window.setTimeout(() => {
+      trackEvent('calculator_updated', {
+        desired_salary: desiredSalary,
+        business_expenses: businessExpenses,
+        tax_rate: taxRate,
+        billable_percentage: billablePercentage,
+      });
+    }, 800);
+
+    return () => window.clearTimeout(timeout);
+  }, [desiredSalary, businessExpenses, taxRate, billablePercentage]);
 
   const calculateRates = () => {
     // Total income needed before taxes
@@ -302,6 +322,7 @@ export function FreelanceCalculator() {
           {/* Link to Invoice Generator */}
           <Link 
             to="/invoice-generator"
+            onClick={() => trackEvent('calculator_to_invoice_clicked')}
             className="block bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl p-6 hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl"
           >
             <div className="flex items-center justify-between">

@@ -1,4 +1,5 @@
 import { ExternalLink, Zap } from 'lucide-react';
+import { trackEvent } from '../analytics';
 
 interface AffiliateLinkProps {
   title: string;
@@ -13,6 +14,13 @@ function AffiliateLink({ title, description, url, badge }: AffiliateLinkProps) {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() =>
+        trackEvent('affiliate_link_clicked', {
+          tool_name: title,
+          destination_url: url,
+          has_badge: Boolean(badge),
+        })
+      }
       className="block p-4 bg-white border border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-md transition-all group"
     >
       <div className="flex items-start justify-between gap-3">

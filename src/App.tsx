@@ -1,5 +1,5 @@
-import { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { lazy, Suspense, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 
 import { FreelanceCalculator } from './components/FreelanceCalculator';
@@ -43,9 +43,28 @@ function PageLoader() {
   );
 }
 
+function AnalyticsTracker() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (typeof window.gtag !== 'function') {
+      return;
+    }
+
+    window.gtag('event', 'page_view', {
+      page_title: document.title,
+      page_path: `${location.pathname}${location.search}`,
+      page_location: window.location.href,
+    });
+  }, [location.pathname, location.search]);
+
+  return null;
+}
+
 export default function App() {
   return (
     <Router>
+      <AnalyticsTracker />
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
         <div className="print:hidden">
           <Navigation />
