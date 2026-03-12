@@ -53,6 +53,22 @@
     build: {
       target: 'esnext',
       outDir: 'dist',
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (!id.includes('node_modules')) return;
+            if (id.includes('jspdf')) return 'jspdf';
+            if (id.includes('recharts') || id.includes('d3-') || id.includes('victory-vendor')) return 'recharts';
+            if (id.includes('react-day-picker') || id.includes('date-fns')) return 'date-picker';
+            if (id.includes('embla-carousel')) return 'carousel';
+            if (id.includes('cmdk')) return 'cmdk';
+            if (id.includes('@radix-ui')) return 'radix-ui';
+            if (id.includes('lucide-react')) return 'lucide';
+            if (id.includes('react-router') || id.includes('react-dom') || id.includes('react/')) return 'react-vendor';
+          },
+        },
+      },
     },
     server: {
       port: 3000,

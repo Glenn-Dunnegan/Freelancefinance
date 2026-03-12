@@ -1,16 +1,48 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { FreelanceCalculator } from './components/FreelanceCalculator';
-import { InvoiceGenerator } from './components/InvoiceGenerator';
-import { FreelancingGuide2026 } from './components/FreelancingGuide2026';
-import { HiddenCosts } from './components/HiddenCosts';
-import { NegotiatingRates } from './components/NegotiatingRates';
-import { FreelancerTaxGuide } from './components/FreelancerTaxGuide';
 import { Navigation } from './components/Navigation';
-import { AboutPage } from './components/AboutPage';
-import { ContactPage } from './components/ContactPage';
-import { PrivacyPolicy } from './components/PrivacyPolicy';
-import { TermsOfService } from './components/TermsOfService';
-import { AffiliateDisclosure } from './components/AffiliateDisclosure';
+
+const FreelanceCalculator = lazy(() =>
+  import('./components/FreelanceCalculator').then((m) => ({ default: m.FreelanceCalculator }))
+);
+const InvoiceGenerator = lazy(() =>
+  import('./components/InvoiceGenerator').then((m) => ({ default: m.InvoiceGenerator }))
+);
+const FreelancingGuide2026 = lazy(() =>
+  import('./components/FreelancingGuide2026').then((m) => ({ default: m.FreelancingGuide2026 }))
+);
+const HiddenCosts = lazy(() =>
+  import('./components/HiddenCosts').then((m) => ({ default: m.HiddenCosts }))
+);
+const NegotiatingRates = lazy(() =>
+  import('./components/NegotiatingRates').then((m) => ({ default: m.NegotiatingRates }))
+);
+const FreelancerTaxGuide = lazy(() =>
+  import('./components/FreelancerTaxGuide').then((m) => ({ default: m.FreelancerTaxGuide }))
+);
+const AboutPage = lazy(() =>
+  import('./components/AboutPage').then((m) => ({ default: m.AboutPage }))
+);
+const ContactPage = lazy(() =>
+  import('./components/ContactPage').then((m) => ({ default: m.ContactPage }))
+);
+const PrivacyPolicy = lazy(() =>
+  import('./components/PrivacyPolicy').then((m) => ({ default: m.PrivacyPolicy }))
+);
+const TermsOfService = lazy(() =>
+  import('./components/TermsOfService').then((m) => ({ default: m.TermsOfService }))
+);
+const AffiliateDisclosure = lazy(() =>
+  import('./components/AffiliateDisclosure').then((m) => ({ default: m.AffiliateDisclosure }))
+);
+
+function PageLoader() {
+  return (
+    <div className="flex items-center justify-center min-h-[40vh]">
+      <div className="w-8 h-8 border-4 border-indigo-400 border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
+}
 
 export default function App() {
   return (
@@ -20,19 +52,21 @@ export default function App() {
           <Navigation />
         </div>
         <div className="py-12 px-4 print:p-0">
-          <Routes>
-            <Route path="/" element={<FreelanceCalculator />} />
-            <Route path="/invoice-generator" element={<InvoiceGenerator />} />
-            <Route path="/guide/freelancing-101" element={<FreelancingGuide2026 />} />
-            <Route path="/guide/hidden-costs" element={<HiddenCosts />} />
-            <Route path="/guide/negotiating-rates" element={<NegotiatingRates />} />
-            <Route path="/guide/tax-guide" element={<FreelancerTaxGuide />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms" element={<TermsOfService />} />
-            <Route path="/affiliate-disclosure" element={<AffiliateDisclosure />} />
-          </Routes>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<FreelanceCalculator />} />
+              <Route path="/invoice-generator" element={<InvoiceGenerator />} />
+              <Route path="/guide/freelancing-101" element={<FreelancingGuide2026 />} />
+              <Route path="/guide/hidden-costs" element={<HiddenCosts />} />
+              <Route path="/guide/negotiating-rates" element={<NegotiatingRates />} />
+              <Route path="/guide/tax-guide" element={<FreelancerTaxGuide />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<TermsOfService />} />
+              <Route path="/affiliate-disclosure" element={<AffiliateDisclosure />} />
+            </Routes>
+          </Suspense>
         </div>
       </div>
     </Router>

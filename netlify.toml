@@ -26,3 +26,21 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+# Long-term caching for hashed JS/CSS assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Short cache for HTML so updates deploy quickly
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Short cache for root
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
