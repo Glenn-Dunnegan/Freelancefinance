@@ -1,4 +1,4 @@
-import { AlertCircle, DollarSign, Heart, Briefcase, TrendingUp, Lock } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 import { Footer } from './Footer';
 import { SEOHead } from './SEOHead';
 

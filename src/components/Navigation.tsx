@@ -1,12 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Calculator, FileText } from 'lucide-react';
-import { useState } from 'react';
 import { Dropdown2 } from './Dd';
 import { MobileNav } from './MobileNav';
 
 export function Navigation() {
   const location = useLocation();
-  const [isGuidesOpen, setIsGuidesOpen] = useState(false);
 
   const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
 
@@ -57,7 +55,7 @@ export function Navigation() {
             </Link>
             
             {/* Guides Dropdown */}
-            <div><Dropdown2 label={'Guides'} items={guideLinks.map(guide => ({ label: guide.label, onClick: () => setIsGuidesOpen(false), path:guide.path }))} /></div>
+            <div><Dropdown2 label={'Guides'} items={guideLinks.map((guide) => ({ label: guide.label, path: guide.path, onClick: () => {} }))} /></div>
           </div>
           </div>
           <div className='mobileNav'>

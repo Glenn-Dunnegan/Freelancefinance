@@ -1,4 +1,4 @@
-import { DollarSign, FileText, AlertCircle, CheckCircle, BarChart3, Calculator } from 'lucide-react';
+import { FileText, AlertCircle } from 'lucide-react';
 import { Footer } from './Footer';
 import { SEOHead } from './SEOHead';
 

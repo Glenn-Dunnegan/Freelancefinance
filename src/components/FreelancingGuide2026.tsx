@@ -1,4 +1,4 @@
-import { Briefcase, Target, DollarSign, TrendingUp, Users, Shield } from 'lucide-react';
+import { Briefcase } from 'lucide-react';
 import { Footer } from './Footer';
 import { SEOHead } from './SEOHead';
 

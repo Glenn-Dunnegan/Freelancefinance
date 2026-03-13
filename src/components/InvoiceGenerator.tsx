@@ -76,10 +76,6 @@ export function InvoiceGenerator() {
     }
   };
 
-  const changeLogoPosition = (position: 'right' | 'left' | 'top' | 'center') => {
-    setLogoPos(position);
-  };
-
   const addLineItem = () => {
     setLineItems([
       ...lineItems,
@@ -373,7 +369,7 @@ export function InvoiceGenerator() {
             </div>
 
             <div className="space-y-4">
-              {lineItems.map((item, index) => (
+              {lineItems.map((item) => (
                 <div key={item.id} className="grid md:grid-cols-12 gap-3 items-start">
                   <div className="md:col-span-5">
                     <label className="block text-xs text-gray-600 mb-1">

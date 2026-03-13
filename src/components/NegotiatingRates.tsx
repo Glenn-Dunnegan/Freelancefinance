@@ -1,4 +1,4 @@
-import { Handshake, TrendingUp, Target, MessageSquare, AlertCircle, CheckCircle } from 'lucide-react';
+import { Handshake, AlertCircle, CheckCircle } from 'lucide-react';
 import { Footer } from './Footer';
 import { SEOHead } from './SEOHead';
 

@@ -33,7 +33,26 @@ export function FreelanceCalculator() {
   });
 
   useEffect(() => {
-    calculateRates();
+    // Recalculate rates whenever any pricing input changes.
+    const incomeBeforeTax = desiredSalary / (1 - taxRate / 100);
+    const incomeWithProfit = incomeBeforeTax * (1 + profitMargin / 100);
+    const totalRevenueNeeded = incomeWithProfit + businessExpenses;
+    const totalHoursAvailable = workingDaysPerYear * hoursPerDay;
+    const billableHours = totalHoursAvailable * (billablePercentage / 100);
+
+    const hourlyRate = totalRevenueNeeded / billableHours;
+    const dailyRate = hourlyRate * hoursPerDay;
+    const weeklyRate = dailyRate * 5;
+    const monthlyRate = dailyRate * (workingDaysPerYear / 12);
+
+    setResults({
+      hourlyRate: Math.ceil(hourlyRate),
+      dailyRate: Math.ceil(dailyRate),
+      weeklyRate: Math.ceil(weeklyRate),
+      monthlyRate: Math.ceil(monthlyRate),
+      totalHoursNeeded: Math.round(totalHoursAvailable),
+      billableHours: Math.round(billableHours),
+    });
   }, [desiredSalary, workingDaysPerYear, hoursPerDay, businessExpenses, profitMargin, taxRate, billablePercentage]);
 
   useEffect(() => {
@@ -53,36 +72,6 @@ export function FreelanceCalculator() {
 
     return () => window.clearTimeout(timeout);
   }, [desiredSalary, businessExpenses, taxRate, billablePercentage]);
-
-  const calculateRates = () => {
-    // Total income needed before taxes
-    const incomeBeforeTax = desiredSalary / (1 - taxRate / 100);
-    
-    // Add profit margin
-    const incomeWithProfit = incomeBeforeTax * (1 + profitMargin / 100);
-    
-    // Add business expenses
-    const totalRevenueNeeded = incomeWithProfit + businessExpenses;
-    
-    // Calculate billable hours
-    const totalHoursAvailable = workingDaysPerYear * hoursPerDay;
-    const billableHours = totalHoursAvailable * (billablePercentage / 100);
-    
-    // Calculate rates
-    const hourlyRate = totalRevenueNeeded / billableHours;
-    const dailyRate = hourlyRate * hoursPerDay;
-    const weeklyRate = dailyRate * 5;
-    const monthlyRate = dailyRate * (workingDaysPerYear / 12);
-
-    setResults({
-      hourlyRate: Math.ceil(hourlyRate),
-      dailyRate: Math.ceil(dailyRate),
-      weeklyRate: Math.ceil(weeklyRate),
-      monthlyRate: Math.ceil(monthlyRate),
-      totalHoursNeeded: Math.round(totalHoursAvailable),
-      billableHours: Math.round(billableHours)
-    });
-  };
 
   return (
     <div className="max-w-6xl mx-auto">

@@ -18,13 +18,6 @@ export function Dropdown({ icon: Icon, label, links, activePath }: DropdownProps
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
-  const isActive = (path: string) => {
-    if (activePath) {
-      return location.pathname === path || location.pathname.startsWith(activePath);
-    }
-    return location.pathname === path;
-  };
-
   const isDropdownActive = activePath 
     ? location.pathname.startsWith(activePath)
     : false;
@@ -46,7 +39,7 @@ export function Dropdown({ icon: Icon, label, links, activePath }: DropdownProps
       
       {isOpen && (
         <div className="dropdown2">
-          {links.map((link, index) => (
+          {links.map((link) => (
             <Link
               key={link.path}
               to={link.path}
