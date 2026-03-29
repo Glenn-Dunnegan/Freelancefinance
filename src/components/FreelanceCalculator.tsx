@@ -5,6 +5,7 @@ import { SEOHead } from './SEOHead';
 import { lazy, Suspense } from 'react';
 import { Footer } from './Footer';
 import { trackEvent } from '../analytics';
+import { calculateFreelancePricing } from '../lib/pricing';
 
 const SEOContent = lazy(() =>
   import('./SEOContent').then((m) => ({ default: m.SEOContent }))
@@ -34,25 +35,17 @@ export function FreelanceCalculator() {
 
   useEffect(() => {
     // Recalculate rates whenever any pricing input changes.
-    const incomeBeforeTax = desiredSalary / (1 - taxRate / 100);
-    const incomeWithProfit = incomeBeforeTax * (1 + profitMargin / 100);
-    const totalRevenueNeeded = incomeWithProfit + businessExpenses;
-    const totalHoursAvailable = workingDaysPerYear * hoursPerDay;
-    const billableHours = totalHoursAvailable * (billablePercentage / 100);
-
-    const hourlyRate = totalRevenueNeeded / billableHours;
-    const dailyRate = hourlyRate * hoursPerDay;
-    const weeklyRate = dailyRate * 5;
-    const monthlyRate = dailyRate * (workingDaysPerYear / 12);
-
-    setResults({
-      hourlyRate: Math.ceil(hourlyRate),
-      dailyRate: Math.ceil(dailyRate),
-      weeklyRate: Math.ceil(weeklyRate),
-      monthlyRate: Math.ceil(monthlyRate),
-      totalHoursNeeded: Math.round(totalHoursAvailable),
-      billableHours: Math.round(billableHours),
-    });
+    setResults(
+      calculateFreelancePricing({
+        desiredSalary,
+        workingDaysPerYear,
+        hoursPerDay,
+        businessExpenses,
+        profitMargin,
+        taxRate,
+        billablePercentage,
+      })
+    );
   }, [desiredSalary, workingDaysPerYear, hoursPerDay, businessExpenses, profitMargin, taxRate, billablePercentage]);
 
   useEffect(() => {

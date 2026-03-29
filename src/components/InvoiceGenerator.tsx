@@ -4,6 +4,7 @@ import { Footer } from './Footer';
 import { SEOHead } from './SEOHead';
 import { InvoiceGeneratorSEO } from './InvoiceGeneratorSEO';
 import { trackEvent } from '../analytics';
+import { calculateInvoiceSubtotal, calculateInvoiceTax, calculateInvoiceTotal } from '../lib/invoice';
 
 interface LineItem {
   id: string;
@@ -96,15 +97,15 @@ export function InvoiceGenerator() {
   };
 
   const calculateSubtotal = () => {
-    return lineItems.reduce((sum, item) => sum + (item.quantity * item.rate), 0);
+    return calculateInvoiceSubtotal(lineItems);
   };
 
   const calculateTax = () => {
-    return calculateSubtotal() * (taxRate / 100);
+    return calculateInvoiceTax(calculateSubtotal(), taxRate);
   };
 
   const calculateTotal = () => {
-    return calculateSubtotal() + calculateTax();
+    return calculateInvoiceTotal(calculateSubtotal(), calculateTax());
   };
 
   const handlePrint = () => {
